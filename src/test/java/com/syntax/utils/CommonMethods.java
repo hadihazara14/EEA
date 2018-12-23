@@ -1,5 +1,6 @@
 package com.syntax.utils;
 
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -9,6 +10,12 @@ public class CommonMethods extends BaseClass {
 	public static void enterValue(WebElement element, String value) {
 		element.clear();
 		element.sendKeys(value);
+		
+	}
+	
+	public static void keysEntering(WebElement element) {
+		element.sendKeys(Keys.ENTER);
+		
 	}
 
 	public static WebElement waiting(WebElement element) {

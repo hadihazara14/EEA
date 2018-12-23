@@ -1,9 +1,11 @@
 package com.syntax.stepDefinitions;
 
-import org.junit.Assert;
+import org.testng.Assert;
+
 import com.syntax.pages.LoginPage;
 import com.syntax.utils.CommonMethods;
 
+import cucumber.api.PendingException;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
@@ -34,3 +36,4 @@ public class LoginPageSteps {
 
 	}
 }
+
