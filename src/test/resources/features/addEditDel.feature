@@ -39,6 +39,6 @@ Feature: OrangeHRM Test Cases
 Scenario: Delete
 
     And Select the Check Box for the edited Report Name from "my report"
-Then Click Delete
-And click Ok
-Then Verify Report Name does not Exist
+		Then Click Delete
+		And click Ok
+		Then Verify Report Name does not Exist

@@ -6,9 +6,11 @@ import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.Select;
 
 import com.syntax.pages.addEditDelPage;
+import com.syntax.utils.BaseClass;
 import com.syntax.utils.CommonMethods;
 
 import cucumber.api.java.en.Given;
@@ -132,21 +134,29 @@ public class addEditDelSteps {
 	public void validate_Report_Name_appears() throws Throwable {
 		Assert.assertTrue(true);
 	}
+	@When("^I click Edit on existing Report from the previous entry$")
+    public void i_click_Edit_on_existing_Report_from_the_previous_entry() throws Throwable {
+  
+		
+	        List<WebElement> rows = (List<WebElement>) obj.editBtn;
+	        for (int i = 1; i <= rows.size(); i++) {
+	            WebElement row = driver.findElement(By.xpath("//table[@id='resultTable']/tbody/tr[" + i + "]"));
+	            String data = row.getText();
+	            Thread.sleep(1000);
+	            if (data.contains("my report")) {
+	                Thread.sleep(1000);
+	                //WebElement edit = BaseClass.driver.findElement(By.xpath("//table[@id='resultTable']/tbody/tr[" + i + "]/td[4]"));
+	                WebElement edit = BaseClass.driver.findElement(By.xpath("//td[text()='my report']//following-sibling::td//following-sibling::td//child::a"));
+	                Actions act = new Actions(driver);
+	                act.moveToElement(edit).doubleClick().perform();
 
+	            }
+	        }
+	    
+    }
 //	@When("^I click Edit on existing Report from the previous entry \"([^\"]*)\"$")
-//	public void i_click_Edit_on_existing_Report_from_the_previous_entry(String selectEdit) throws Throwable {
-//		
-//	}
-//		CommonMethods.click(obj.edit);
-//		Select select4 = new Select(obj.edit);
-//		select4.selectByVisibleText(selectEdit);
-//	}
-
-	@When("^I click Edit on existing Report from the previous entry \"([^\"]*)\"$")
-	public void i_click_Edit_on_existing_Report_from_the_previous_entry(String report) throws InterruptedException {
-	     CommonMethods.click(obj.editBtn);
-	        Thread.sleep(5000);
-	  
+//	public void i_click_Edit_on_existing_Report_from_the_previous_entry(String report) throws InterruptedException {
+//	  
 //		//String xPATH = "//table[@id='resultTable']/tbody/tr";
 //		List<WebElement> row = obj.checkReport.findElements(By.tagName("tr"));
 //		
@@ -174,7 +184,6 @@ public class addEditDelSteps {
 //		 CommonMethods.click(obj.edit);
 		// }
 
-	}
 
 	@When("^Select Selection Criteria to Age group \"([^\"]*)\"$")
 	public void select_Selection_Criteria_to_Age_group(String selectAgeGroup) throws Throwable {
@@ -240,13 +249,21 @@ public class addEditDelSteps {
 	    CommonMethods.click(obj.Addbtn);
 	    
 	}
-	
-    @When("^Select the Check Box for the edited Report Name from \"([^\"]*)\"$")
-    public void select_the_Check_Box_for_the_edited_Report_Name_from(String delReport) throws Throwable {
-        CommonMethods.click(obj.DelEle);
-        
+	@When("^Select the Check Box for the edited Report Name from$")
+    public void select_the_Check_Box_for_the_edited_Report_Name_from() throws Throwable {
+		  List<WebElement> rows = (List<WebElement>) obj.DelEle;
+
+        for (int i = 1; i <=rows.size(); i++) {
+            WebElement row = driver.findElement(By.xpath("//table[@id='resultTable']/tbody/tr[" + i + "]"));
+            String data = row.getText();
+            System.out.println("Data from row " + i + " : " + data);
+            if (data.contains("my report")) {
+                BaseClass.driver.findElement(By.xpath("//table[@id='resultTable']/tbody/tr[" + i + "]/td[1]")).click();
+            }
+        }
     }
-    
+
+
 	@Then("^Click Delete$")
 	public void click_Delete() throws Throwable {
 	    CommonMethods.click(obj.btnDelete);
@@ -257,11 +274,21 @@ public class addEditDelSteps {
 	  CommonMethods.click(obj.DelOk);
 	  
 	}
-
-	@Then("^Verify Report Name does not Exist$")
-	public void verify_Report_Name_does_not_Exist() throws Throwable {
-	  Assert.assertTrue(true);
-	}
+	   @Then("^Verify Report Name does not Exist$")
+	    public void verify_Report_Name_does_not_Exist() {
+			  List<WebElement> rows = (List<WebElement>) obj.DelEle;
 
 
-}
+	        for (int i = 1; i < rows.size(); i++) {
+	            WebElement row = driver.findElement(By.xpath("//table[@id='resultTable']/tbody/tr[" + i + "]"));
+	            String data = row.getText();
+	            System.out.println("Data from row " + i + " : " + data);
+	            if (data.contains("my report")) {
+	                System.out.println("Report was not deleted");
+	            } else {
+	                System.out.println("Report was successfully delted.");
+	            }
+	        }
+	   }}
+
+

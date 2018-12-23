@@ -57,7 +57,7 @@ public class addEditDelPage extends BaseClass{
 	public WebElement save;
 	
 
-	@FindBy(xpath="//a[@href='/index.php/core/definePredefinedReport?reportId=11']")
+	@FindBy(xpath="//table[@id='resultTable']/tbody/tr")
     public WebElement editBtn;
 	
 //	@FindBy(xpath="//table[@id='resultTable']/tbody")
@@ -76,8 +76,9 @@ public class addEditDelPage extends BaseClass{
 	@FindBy(id="location")
 	public WebElement Location;
 	
-	@FindBy(id="ohrmList_chkSelectRecord_6")
+	@FindBy(id="//table[@id='resultTable']/tbody/tr")
 	public WebElement DelEle;
+//	
 	
 	@FindBy (id="btnDelete")
 	public WebElement btnDelete;
