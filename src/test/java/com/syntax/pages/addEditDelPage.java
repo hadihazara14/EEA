@@ -9,8 +9,6 @@ import com.syntax.utils.BaseClass;
 
 public class addEditDelPage extends BaseClass{
 
-	
-
 	@FindBy(id="txtUsername")
 	public WebElement userName;
 
@@ -87,26 +85,11 @@ public class addEditDelPage extends BaseClass{
 	public WebElement DelOk;
 	
 	
-	
-	
-	
-	
-	
-	
 //	@FindBy(id="")
 //	public WebElement Validate;
-	
-	
-	
-	
-	
 
 	public addEditDelPage() {
 		PageFactory.initElements(driver, this);
 	}
 	
-
-
-
-
 }
